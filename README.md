@@ -1,39 +1,65 @@
-<!--
-This README describes the package. If you publish this package to pub.dev,
-this README's contents appear on the landing page for your package.
+### 引用包
 
-For information about how to write a good package README, see the guide for
-[writing package pages](https://dart.dev/guides/libraries/writing-package-pages).
+1、在pubspec.yaml添加引用
 
-For general information about developing packages, see the Dart guide for
-[creating packages](https://dart.dev/guides/libraries/create-library-packages)
-and the Flutter guide for
-[developing packages and plugins](https://flutter.dev/developing-packages).
--->
+```ruby
 
-TODO: Put a short description of the package here that helps potential users
-know whether this package might be useful for them.
-
-## Features
-
-TODO: List what your package can do. Maybe include images, gifs, or videos.
-
-## Getting started
-
-TODO: List prerequisites and provide or point to information on how to
-start using the package.
-
-## Usage
-
-TODO: Include short and useful examples for package users. Add longer examples
-to `/example` folder.
-
-```dart
-const like = 'sample';
+  flutter_luk:
+    git: https://github.com/HOKI-GROUP/flutter_luk.git
 ```
 
-## Additional information
+### 使用
 
-TODO: Tell users more about the package: where to find more information, how to
-contribute to the package, how to file issues, what response they can expect
-from the package authors, and more.
+**只需配置GameView，即可使用,GameView可以配置在正常的页面(互动游戏)、也可配置在Dialog中(概率游戏)**
+
+```java
+          GameView(
+            url: "游戏的URL,由业务后端向SDK方获取",
+            gid: "游戏的ID,由业务后端向SDK方获取",
+            rid: "这里填写业务方的房间ID",
+            canOpenGame: true,
+            //是否可以打开游戏
+            language: "en",
+            //游戏语言
+            width: MediaQuery.of(context).size.width.toInt(),
+            height: MediaQuery.of(context).size.height.toInt(),
+            cid: '这里填写LUK SDK给的Appid',
+            uid: "业务用户Uid",
+            token: "业务token,",
+            padding: EdgeInsets.fromLTRB(
+                16,
+                MediaQuery.of(context).padding.top + 32,
+                16,
+                MediaQuery.of(context).padding.bottom + 16),
+            //游戏安全区
+            preJoinGame: (int uid, int seat) async {
+              //TODO 加入前回调
+              return true;
+            },
+            openChargePage: () async {
+              //TODO 跳转 到充值页面
+            },
+          ),
+```
+
+### GameView主要参数和Api说明
+
+| 参数或回调方法          | 说明                  |
+| :--------------- | :------------------ |
+| url              | 游戏的URL,由业务后端向SDK方获取 |
+| gid              | 游戏的ID,由业务后端向SDK方获取  |
+| rid              | 业务方的房间ID            |
+| uid              | 业务的用户ID             |
+| cid              | AppId               |
+| token            | 业务方请求接口的token       |
+| language         | 语言，例： en            |
+| padding          | 视图边距，互动游戏才有         |
+| gameLoadFail()   | 游戏加载错误回调(互动游戏)      |
+| preJoinGame()    | 加入游戏前回调(互动游戏)       |
+| joinGame()       | 加入游戏回调(互动游戏)        |
+| cancelPrepare()  | 取消游戏前回调(互动游戏)       |
+| gameTerminated() | 游戏终止(互动游戏)          |
+| gameOver()       | 游戏结束(互动游戏)          |
+| openChargePage() | 打开充值界面              |
+| closeGamePage()  | 关闭游戏                |
+
