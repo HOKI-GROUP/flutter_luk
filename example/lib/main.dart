@@ -1,3 +1,5 @@
+import 'package:example/game_dialog.dart';
+import 'package:example/game_page.dart';
 import 'package:flutter/material.dart';
 
 void main() {
@@ -30,14 +32,6 @@ class MyHomePage extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<MyHomePage> {
-  int _counter = 0;
-
-  void _incrementCounter() {
-    setState(() {
-      _counter++;
-    });
-  }
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -49,21 +43,36 @@ class _MyHomePageState extends State<MyHomePage> {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
-            const Text(
-              'You have pushed the button this many times:',
-            ),
-            Text(
-              '$_counter',
-              style: Theme.of(context).textTheme.headlineMedium,
-            ),
+            TextButton(
+                onPressed: () {
+                  GameDialog.showGameDialog(context,
+                      gameId: 21,
+                      gameName: "Jackpot",
+                      gameUrl:
+                          "https://games.lucky9studio.com/sdk/app_Debug/slotmachine/index.html?half=0");
+                },
+                child: const Text(
+                  "弹窗游戏:Jackpot",
+                  style: TextStyle(color: Colors.black, fontSize: 16),
+                )),
+            const SizedBox(height: 32,),
+            TextButton(
+                onPressed: () {
+                  Navigator.of(context).push(MaterialPageRoute(
+                      //没有传值
+                      builder: (context) => const GamePage(
+                          gameId: 68,
+                          gameName: "Ludo",
+                          gameUrl:
+                              "https://games.lucky9studio.com/sdk/app_Debug/ludo2/index.html")));
+                },
+                child: const Text(
+                  "互动游戏:Ludo",
+                  style: TextStyle(color: Colors.black, fontSize: 16),
+                ))
           ],
         ),
       ),
-      floatingActionButton: FloatingActionButton(
-        onPressed: _incrementCounter,
-        tooltip: 'Increment',
-        child: const Icon(Icons.add),
-      ), // This trailing comma makes auto-formatting nicer for build methods.
     );
   }
 }

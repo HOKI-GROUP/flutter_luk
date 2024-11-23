@@ -66,8 +66,8 @@ class _GameViewState extends State<GameView> {
   }
 
   void _initController() async {
-    final injectJS = await rootBundle
-        .loadString('packages/fext_3rd_game_center/assets/inject.js');
+    final injectJS =
+        await rootBundle.loadString('packages/flutter_luk/assets/inject.js');
 
     _controller
       ..setBackgroundColor(Colors.transparent)

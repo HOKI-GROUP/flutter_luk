@@ -41,24 +41,22 @@ class _GamePageState extends State<GamePage> {
             key: ValueKey(widget.gameId),
             url: widget.gameUrl,
             gid: widget.gameId.toString(),
-            rid: "room_id",
-            //这里填写业务方的房间ID
+            rid: "这里填写业务方的房间ID",
             canOpenGame: true,
             //是否可以打开游戏
             language: "en",
             //游戏语言
             width: MediaQuery.of(context).size.width.toInt(),
             height: MediaQuery.of(context).size.height.toInt(),
-            cid: '1004',
-            uid: "",
-            //业务用户Uid
-            token: "",
-            //业务token,
+            cid: '这里填写LUK给的Appid',
+            uid: "业务用户Uid",
+            token: "业务token,",
             padding: EdgeInsets.fromLTRB(
                 16,
-                MediaQuery.of(context).padding.top + 16,
+                MediaQuery.of(context).padding.top + 32,
                 16,
                 MediaQuery.of(context).padding.bottom + 16),
+            //游戏安全区
             preJoinGame: (int uid, int seat) async {
               //TODO 加入前回调
               return true;
